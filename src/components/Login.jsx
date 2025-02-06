@@ -12,6 +12,9 @@ export default function Login() {
 
     console.log("Email:", emailValue);
     console.log("Password:", passwordValue);
+
+    email.current.value = ""; // to reset values in ref approach (not recommended)
+    password.current.value = "";
   }
 
   return (
