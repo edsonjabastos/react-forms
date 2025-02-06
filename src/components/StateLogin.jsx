@@ -17,6 +17,11 @@ export default function Login() {
 
     console.log("Email:", loginEntry.email);
     console.log("Password:", loginEntry.password);
+
+    setLoginEntry({ // to reset values in state approach
+      email: "",
+      password: "",
+    });
   }
 
   function handleLoginEntryChange(identifier, value) {
