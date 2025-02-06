@@ -4,13 +4,24 @@ export default function Login() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
+  const [didEdit, setDidEdit] = useState({
+    email: false,
+    password: false,
+  });
+
   const [loginEntry, setLoginEntry] = useState({
     email: "",
+    // email:{
+    //   value: "",
+    //   didBlur: false,
+    // },
     password: "",
   });
 
-  const emmailIsInvalid =
-    loginEntry.email !== "" && !loginEntry.email.includes("@");
+  // const emmailIsInvalid =
+  //   loginEntry.email !== "" && !loginEntry.email.includes("@");
+
+  const emmailIsInvalid = didEdit.email && !loginEntry.email.includes("@");
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -33,6 +44,17 @@ export default function Login() {
       ...loginEntry,
       [identifier]: value,
     });
+    setDidEdit((prevEdit) => ({
+      ...prevEdit,
+      [identifier]: false,
+    }));
+  }
+
+  function handleInputBlur(identifier) {
+    setDidEdit((prevEdit) => ({
+      ...prevEdit,
+      [identifier]: true,
+    }));
   }
 
   // function handleEmailChange(event) {
@@ -54,6 +76,7 @@ export default function Login() {
             id="email"
             type="email"
             name="email"
+            onBlur={() => handleInputBlur("email")}
             onChange={(e) => handleLoginEntryChange("email", e.target.value)}
             value={loginEntry.email}
           />
