@@ -29,6 +29,8 @@ export default function StateLogin() {
     // console.log("Email:", email);
     // console.log("Password:", password);
 
+    // if (...) // validations
+
     console.log("Email:", loginEntry.email);
     console.log("Password:", loginEntry.password);
 
