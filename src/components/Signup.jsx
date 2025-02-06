@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function Signup() {
+  const [passwordNotMatch, setPasswordNotMatch] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
@@ -7,9 +11,18 @@ export default function Signup() {
     const acquisitionChannel = formData.getAll("acquisition");
     const data = Object.fromEntries(formData.entries());
     data.acquisition = acquisitionChannel;
+
+    if (data.password !== data["confirm-password"]) {
+      setPasswordNotMatch(true);
+      return;
+    }
+
+    setPasswordNotMatch(false);
+
+    console.log("Sending HTTP request to sign up the user...");
     console.log(data);
 
-    form.reset();
+    // form.reset();
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -24,7 +37,13 @@ export default function Signup() {
       <div className="control-row">
         <div className="control">
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" required />
+          <input
+            id="password"
+            type="password"
+            name="password"
+            required
+            minLength={8}
+          />
         </div>
 
         <div className="control">
@@ -35,6 +54,9 @@ export default function Signup() {
             name="confirm-password"
             required
           />
+          <div className="control-error">
+            {passwordNotMatch && <p>Passwords must match</p>}
+          </div>
         </div>
       </div>
 
