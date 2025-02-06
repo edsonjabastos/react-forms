@@ -81,6 +81,7 @@ export default function StateLogin() {
             onBlur={() => handleInputBlur("email")}
             onChange={(e) => handleLoginEntryChange("email", e.target.value)}
             value={loginEntry.email}
+            required
           />
           <div className="control-error">
             {emmailIsInvalid && <p>Enter a valid email address</p>}
@@ -95,6 +96,7 @@ export default function StateLogin() {
             name="password"
             onChange={(e) => handleLoginEntryChange("password", e.target.value)}
             value={loginEntry.password}
+            required
           />
         </div>
       </div>
