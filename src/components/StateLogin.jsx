@@ -9,6 +9,9 @@ export default function Login() {
     password: "",
   });
 
+  const emmailIsInvalid =
+    loginEntry.email !== "" && !loginEntry.email.includes("@");
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -18,7 +21,8 @@ export default function Login() {
     console.log("Email:", loginEntry.email);
     console.log("Password:", loginEntry.password);
 
-    setLoginEntry({ // to reset values in state approach
+    setLoginEntry({
+      // to reset values in state approach
       email: "",
       password: "",
     });
@@ -53,6 +57,9 @@ export default function Login() {
             onChange={(e) => handleLoginEntryChange("email", e.target.value)}
             value={loginEntry.email}
           />
+          <div className="control-error">
+            {emmailIsInvalid && <p>Enter a valid email address</p>}
+          </div>
         </div>
 
         <div className="control no-margin">
